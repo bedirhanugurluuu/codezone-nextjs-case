@@ -1,36 +1,228 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rapkology - CodeZone Software - Case
 
-## Getting Started
 
-First, run the development server:
+##  Teknoloji Stack'i
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### **Frontend Framework**
+- **Next.js 15.5.3** - React tabanlı full-stack framework
+- **TypeScript** - Type-safe development
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **React 19.1.0** - Modern React hooks ve components
+
+### **UI/UX Kütüphaneleri**
+- **Swiper.js 12.0.1** - Modern slider/carousel component
+- **Lucide React** - Modern icon library
+- **Next/Image** - Optimize edilmiş görsel yükleme
+
+### **Development Tools**
+- **ESLint** - Code quality ve standartlar
+- **PostCSS** - CSS processing
+- **Turbopack** - Ultra-fast bundler
+
+## Proje Özellikleri
+
+### **Ana Sayfa (Homepage)**
+
+### **Blog Sistemi**
+- **Blog Ana Sayfası** (`/blog`):
+- **Blog Post Detay** (`/blog/[slug]`):
+
+### **Responsive Design**
+- **Mobile-First**: 768px altında optimize
+- **Hamburger Menü**: Mobilde gizli menü sistemi
+
+## **Mimari Kararlar**
+
+### **Rendering Strategy: SSG (Static Site Generation)**
+```typescript
+// Tüm blog postları build time'da pre-render ediliyor
+export async function generateStaticParams() {
+  return mockPosts.map((post) => ({
+    slug: post.attributes.slug,
+  }));
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **Data Management**
+- **MockData**: Gerçek API simülasyonu
+- **TypeScript Interfaces**: Type-safe data handling
+- **Dynamic Content**: Tag-based filtering ve categorization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **Component Architecture**
+```
+src/
+├── components/
+│   ├── Header.tsx          # Global navigation
+│   ├── Footer.tsx          # Blog sayfası footer
+│   ├── HeroSection.tsx     # Ana sayfa hero
+│   ├── Explore.tsx         # Ana sayfa keşfet
+│   ├── ExploreBlog.tsx     # Blog keşfet (farklı layout)
+│   ├── Blog.tsx            # Blog ana sayfa
+│   ├── BlogPost.tsx        # Blog post detay
+│   ├── Trends.tsx          # Ana sayfa trends
+│   ├── TrendsBlog.tsx      # Blog trends (2'li grid)
+│   └── ...
+└── data/
+    └── mockData.ts         # Centralized data management
+```
 
-## Learn More
+## 🔧 **Geliştirme Süreci**
 
-To learn more about Next.js, take a look at the following resources:
+### **Component Development**
+1. **Header System**: Logo, navigation, responsive menu
+2. **Layout Components**: Grid systems, flexbox layouts
+3. **Content Components**: Post cards, sliders, lists
+4. **Interactive Features**: Filtering, pagination, toggles
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Responsive Implementation**
+- **Mobile Optimization**: 768px breakpoint
+- **Content Reorganization**: Sidebar'ın mobilde üste taşınması
+- **Menu System**: Desktop navigation + mobile hamburger
+- **Grid Adaptations**: 4→2→1 column responsive grids
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **SEO & Performance**
+- **Dynamic Metadata**: MockData'dan SEO bilgileri
+- **Sitemap Generator**: Otomatik sitemap oluşturma
+- **Robots.txt**: Search engine optimization
+- **Image Optimization**: Next/Image ile lazy loading
 
-## Deploy on Vercel
+## 📊 **Performance Metrikleri**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **Build Output**
+```
+Route (app)                    Size    First Load JS
+┌ ○ /                         8.53 kB      161 kB
+├ ○ /blog                    10.5 kB       163 kB
+├ ● /blog/[slug]             9.92 kB       133 kB
+├ ○ /robots.txt                 0 B          0 B
+└ ○ /sitemap.xml                0 B          0 B
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Sonuçlar:**
+- Tüm sayfalar 10kB altında
+- First Load JS optimize
+- Shared chunks efficient
+- Static generation başarılı
+
+## 🔗 **Routing Sistemi**
+
+### **Page Structure**
+```
+/                           # Ana sayfa
+├── /blog                   # Blog ana sayfası
+└── /blog/[slug]           # Dynamic blog post sayfaları
+    ├── /blog/lark2020den-yeni-parca-olmemi-istemezsin-yayinda
+    ├── /blog/favordan-sert-bir-veda-ya-kal-ya-da-git-yayinda
+    └── [+3 more]
+```
+
+
+## **Özel Özellikler**
+
+
+
+### **1. Advanced Filtering System**
+```typescript
+// Tag-based filtering
+const filteredPosts = mockPosts.filter(post => 
+  post.attributes.tags.includes(activeTab)
+);
+```
+
+### **2. Dynamic SEO Implementation**
+```typescript
+// MockData'dan otomatik SEO
+return {
+  title: seo.metaTitle || `${post.attributes.title} - Rapkology`,
+  description: seo.metaDescription || post.attributes.desc,
+  openGraph: { /* ... */ },
+  twitter: { /* ... */ },
+};
+```
+
+### **3. Component Reusability**
+- **Explore**: Ana sayfa + Blog sayfası (farklı styling)
+- **Trends**: Ana sayfa (3'lü) + Blog (2'li) versiyonları
+- **Footer**: Conditional rendering (sadece blog)
+
+## **Teknik Detaylar**
+
+### **State Management**
+- **React Hooks**: useState, useEffect, useMemo
+- **Local State**: Component-level state management
+- **Props Drilling**: Efficient data passing
+
+### **CSS Architecture**
+- **CSS Variables**: Scalable design tokens
+- **Responsive Design**: Mobile-first approach
+- **Component Styling**: Modular CSS approach
+
+### **TypeScript Implementation**
+```typescript
+// Strict typing
+interface Post {
+  _id: string;
+  attributes: {
+    title: string;
+    slug: string;
+    content: string;
+    tags: string[];
+    seo: SEOData;
+    // ...
+  };
+}
+```
+
+## **Responsive Breakpoints**
+
+- **Mobile**: < 768px (tek sütun, hamburger menü)
+- **Tablet**: 768px - 1024px (2 sütun)
+- **Desktop**: > 1024px (3-4 sütun, full features)
+
+## 🔍 **SEO Optimizasyonları**
+
+### **Meta Tags**
+- Dynamic title ve description
+- OpenGraph social media tags
+- Twitter Card optimization
+- Canonical URLs
+
+### **Technical SEO**
+- **Sitemap.xml**: Otomatik oluşturma
+- **Robots.txt**: Search engine guidance
+- **Structured Data**: Article markup
+- **Performance**: Fast loading times
+
+## **Deployment**
+
+### **Vercel Optimization**
+- **Static Generation**: Pre-rendered HTML
+- **Edge Network**: Global CDN distribution
+- **Automatic Optimization**: Image, CSS, JS minification
+- **Zero Config**: Otomatik deployment
+
+### **Performance Features**
+- **Image Optimization**: Next/Image lazy loading
+- **Code Splitting**: Page-based bundles
+- **Tree Shaking**: Unused code elimination
+- **Caching**: Optimal cache headers
+
+
+---
+
+## 🚀 **Kurulum ve Çalıştırma**
+
+```bash
+# Dependencies
+npm install
+
+# Development
+npm run dev
+
+# Production Build
+npm run build
+
+# Start Production
+npm start
+```
