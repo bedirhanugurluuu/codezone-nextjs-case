@@ -131,7 +131,7 @@ export default function Explore({ posts }: ExploreProps) {
               {filteredPosts.slice(0, 6).map((post) => (
                 <a 
                   key={post._id} 
-                  href="#" 
+                  href={`/blog/${post.attributes.slug}`}
                   className="explore-item"
                   style={{ 
                     marginBottom: gridView === 'two' ? '0' : 'var(--60)',

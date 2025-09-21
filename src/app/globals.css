@@ -611,23 +611,26 @@ section h1 {
   transition: 0.3s ease-in-out;
 }
 
-.swiper-item:hover .swiper-image {
-  z-index: 1;
-  position: absolute;
-  width: calc(var(--10) * 18.4);
-  aspect-ratio: 1 / 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
+@media (min-width: 768px) {
+  .swiper-item:hover .swiper-image {
+    z-index: 1;
+    position: absolute;
+    width: calc(var(--10) * 18.4);
+    aspect-ratio: 1 / 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+  }
+  
+  .swiper-item:hover .swiper-content {
+    opacity: 0;
+  }
 }
 
 .swiper-item .swiper-content {
   transition: opacity 0.3s ease-in-out;
 }
 
-.swiper-item:hover .swiper-content {
-  opacity: 0;
-}
 
 .swiper-item .swiper-content .info {
   padding: var(--5) var(--20);
