@@ -1452,7 +1452,7 @@ header .btn.light {
   }
 
   .footer-social > div:first-child {
-    margin-bottom: calc(var(--dsm-10) * 4);
+    margin-bottom: calc(var(--dsm-10) * 4) !important;
   }
 
   .footer-social a {

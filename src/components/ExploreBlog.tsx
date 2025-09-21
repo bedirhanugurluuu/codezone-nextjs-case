@@ -58,7 +58,7 @@ export default function ExploreBlog() {
  
                  <button
                    onClick={() => setGridView('two')}
-                   className={`p-2 transition-colors cursor-pointer ${gridView === 'two' ? 'text-yellow-500' : 'text-white hover:text-yellow-500'}`}
+                   className={`p-2 transition-colors cursor-pointer hidden md:block ${gridView === 'two' ? 'text-yellow-500' : 'text-white hover:text-yellow-500'}`}
                  >
                    <svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <rect x="0.294495" y="0.119629" width="24.0033" height="3.75257" rx="1.43424" fill="currentColor"/>
@@ -69,7 +69,7 @@ export default function ExploreBlog() {
  
                  <button 
                    onClick={() => setGridView('four')}
-                   className={`p-2 transition-colors cursor-pointer ${gridView === 'four' ? 'text-yellow-500' : 'text-white hover:text-yellow-500'}`}
+                   className={`p-2 transition-colors cursor-pointer hidden md:block ${gridView === 'four' ? 'text-yellow-500' : 'text-white hover:text-yellow-500'}`}
                  >
                    <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <rect x="0.950256" y="0.119629" width="9.9111" height="3.75257" rx="1.43424" fill="currentColor"/>
