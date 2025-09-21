@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { Post } from '@/data/mockData';
 
@@ -11,6 +11,7 @@ interface ExploreProps {
 export default function Explore({ posts }: ExploreProps) {
   const [gridView, setGridView] = useState('single'); // 'single', 'two'
   const [activeTag, setActiveTag] = useState('Tümü');
+  const [dateFormats, setDateFormats] = useState<{ [key: string]: string }>({});
 
   // Tüm unique tag'leri al
   const allTags = useMemo(() => {
@@ -26,6 +27,19 @@ export default function Explore({ posts }: ExploreProps) {
     if (activeTag === 'Tümü') return posts;
     return posts.filter(post => post.attributes.tags.includes(activeTag));
   }, [posts, activeTag]);
+
+  // Client-side tarih formatlaması
+  useEffect(() => {
+    const formats: { [key: string]: string } = {};
+    posts.forEach(post => {
+      formats[post._id] = new Date(post.createdAt).toLocaleDateString('tr-TR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    });
+    setDateFormats(formats);
+  }, [posts]);
 
   return (
     <section className="py-20 lg:py-40">
@@ -159,11 +173,7 @@ export default function Explore({ posts }: ExploreProps) {
                       />
                     </div>
                     <span style={{color: '#404040'}}>
-                      {new Date(post.createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
+                      {dateFormats[post._id] || 'Yükleniyor...'}
                     </span>
                   </div>
 

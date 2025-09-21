@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { mockPosts } from '@/data/mockData';
@@ -9,6 +9,7 @@ export default function ExploreBlog() {
   const [gridView, setGridView] = useState('four'); // 'four', 'two', 'list'
   const [activeTab, setActiveTab] = useState('Haftanın Videoları');
   const [visibleCount, setVisibleCount] = useState(4);
+  const [dateFormats, setDateFormats] = useState<{ [key: string]: string }>({});
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
@@ -26,6 +27,19 @@ export default function ExploreBlog() {
 
   const visiblePosts = filteredPosts.slice(0, visibleCount);
   const hasMorePosts = visibleCount < filteredPosts.length;
+
+  // Client-side tarih formatlaması
+  useEffect(() => {
+    const formats: { [key: string]: string } = {};
+    mockPosts.forEach(post => {
+      formats[post._id] = new Date(post.createdAt).toLocaleDateString('tr-TR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    });
+    setDateFormats(formats);
+  }, []);
 
   const handleLoadMore = () => {
     setVisibleCount(prev => prev + 4);
@@ -152,11 +166,7 @@ export default function ExploreBlog() {
                       />
                     </div>
                      <span className="text-gray-300 text-sm mt-2 block">
-                       {new Date(post.createdAt).toLocaleDateString('tr-TR', {
-                         year: 'numeric',
-                         month: 'long',
-                         day: 'numeric'
-                       })}
+                       {dateFormats[post._id] || 'Yükleniyor...'}
                      </span>
                    </div>
 

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Play, Calendar, User } from 'lucide-react';
 import { Post } from '@/data/mockData';
+import { useState, useEffect } from 'react';
 
 interface PostCardProps {
   post: Post;
@@ -10,6 +11,13 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post, variant = 'default' }: PostCardProps) {
+  const [formattedDate, setFormattedDate] = useState('');
+
+  useEffect(() => {
+    // Client-side tarih formatlaması ile hydration sorununu çözelim
+    setFormattedDate(new Date(post.createdAt).toLocaleDateString('tr-TR'));
+  }, [post.createdAt]);
+
   const getCardClasses = () => {
     switch (variant) {
       case 'large':
@@ -109,7 +117,7 @@ export default function PostCard({ post, variant = 'default' }: PostCardProps) {
             <div className="flex items-center space-x-1">
               <Calendar className="h-3 w-3" />
               <span>
-                {new Date(post.createdAt).toLocaleDateString('tr-TR')}
+                {formattedDate || 'Yükleniyor...'}
               </span>
             </div>
           </div>

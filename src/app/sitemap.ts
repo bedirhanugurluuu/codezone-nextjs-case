@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { mockPosts } from '@/data/mockData';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://rapkology.com';
+  const baseUrl = 'https://codezone-nextjs-case.vercel.app/';
 
   const staticPages = [
     {

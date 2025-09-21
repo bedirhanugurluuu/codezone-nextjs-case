@@ -1,5 +1,10 @@
 # Rapkology - CodeZone Software - Case
 
+##  Sayfalar
+- https://codezone-nextjs-case.vercel.app/
+- https://codezone-nextjs-case.vercel.app/blog
+- https://codezone-nextjs-case.vercel.app/blog/[slug]
+
 
 ##  Teknoloji Stack'i
 

@@ -19,7 +19,7 @@ export default function Trends({ posts }: TrendsProps) {
     <section className="py-8 lg:py-30 trends-section">
       <div className="container">
         <div className="mb-8 flex items-center gap-4 trends-title">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl mb-10 font-bold text-white font-saira-condensed">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white font-saira-condensed">
             TRENDLER
           </h2>
           <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">

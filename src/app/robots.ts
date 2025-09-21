@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://rapkology.com'; // Site URL'ini güncelleyebilirsin
+  const baseUrl = 'https://codezone-nextjs-case.vercel.app/';
 
   return {
     rules: {
